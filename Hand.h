@@ -6,6 +6,11 @@
 template <typename T>
 class Hand
 {
+	friend std::ostream& operator<<(std::ostream& os, Hand const& hand)
+	{
+		return os << *(hand.hand);
+	}
+	
 private:
 	Linkedlist<T> *hand;
 
@@ -30,11 +35,6 @@ public:
 	int search(T data) const;
 
 	T operator[](int index);
-
-	friend std::ostream& operator<<(std::ostream& os, const Hand<T>& hand)
-	{
-		return os << *(hand.hand);
-	}
 };
 
 template <typename T>
