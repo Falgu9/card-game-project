@@ -6,6 +6,18 @@
 template <typename T>
 class Linkedlist
 {
+	friend std::ostream& operator<<(std::ostream& os, Linkedlist const& linkedlist)
+	{
+		Node *current = linkedlist.head;
+		for (int i = 0; i < linkedlist.size; i++)
+		{
+			// linkedlist must contain pointer to be correctly displayed in os
+			os << *current -> getData();
+			current = current -> getNext();
+		}
+
+		return os;
+	}
 private:
 	class Node
 	{
@@ -14,21 +26,6 @@ private:
 		Node *next;
 	public:
 		Node(T data) : data(data), next(0) {}
-		Node(Node const& copy) : data(copy.data), next(0)
-		{
-			next = new Node(*(copy.next));
-		}
-		Node& operator=(Node const& copy)
-		{
-			if(this != &copy)
-			{
-				delete next;
-				data = copy.data;
-				next = new Node(*(copy.next));
-			}
-
-			return *this;
-		}
 		void setNext(Node *next) { this -> next = next; }
 		void setData(T data) { this -> data = data; }
 		Node *getNext() { return next; }
@@ -39,8 +36,8 @@ private:
 	Node *tail;
 	int size;
 
-	void insertAtHead(T data);
-	void insertAtTail(T data);
+	void insertAtHead(Node *node);
+	void insertAtTail(Node *node);
 
 	T removeAtHead();
 	T removeAtTail();
@@ -48,6 +45,7 @@ private:
 public:
 	Linkedlist();
 	Linkedlist(Linkedlist<T> const& copy);
+	Linkedlist<T>& operator=(Linkedlist<T> const& copy);
 	~Linkedlist();
 
 	T getHead() const;
@@ -66,21 +64,6 @@ public:
 
 	T operator[](int index);
 	void print() const;
-
-	Linkedlist<T>& operator=(Linkedlist<T> const& copy);
-
-	friend std::ostream& operator<<(std::ostream& os, const Linkedlist<T>& linkedlist)
-	{
-		Node *current = linkedlist.head;
-		for (int i = 0; i < linkedlist.size; i++)
-		{
-			// linkedlist must contain pointer to be correctly displayed in os
-			os << *current -> getData();
-			current = current -> getNext();
-		}
-
-		return os;
-	}
 };
 
 template <typename T>
@@ -110,15 +93,10 @@ Linkedlist<T>& Linkedlist<T>::operator=(Linkedlist<T> const& copy)
 
 template <typename T>
 Linkedlist<T>::~Linkedlist(){
-	if(!isEmpty())
+	Node *tmp = NULL;
+	for(int i = 0; i < size; i++)
 	{
-		Node *tmp = NULL;
-		for(int i = 0; i < size; i++)
-		{
-			tmp = head;
-			head = head -> getNext();
-			delete tmp;
-		}	
+		removeAtIndex(0);
 	}
 }
 
@@ -155,14 +133,13 @@ template <typename T>
 void Linkedlist<T>::insertAtIndex(T data, int index)
 {
 	Node *inserted = new Node(data);
-	
 	if (isEmpty())
 	{
 		head = inserted;
 		tail = inserted;
 	}
-	else if (index == 0) insertAtHead(data);
-	else if (index > size - 1) insertAtTail(data);
+	else if (index == 0) insertAtHead(inserted);
+	else if (index > size - 1) insertAtTail(inserted);
 	else
 	{
 		Node *current = head;
@@ -179,20 +156,19 @@ void Linkedlist<T>::insertAtIndex(T data, int index)
 }
 
 template <typename T>
-void Linkedlist<T>::insertAtHead(T data)
+void Linkedlist<T>::insertAtHead(Node *node)
 {
-	Node *tmp = new Node(data);
-	if(head != NULL) tmp->setNext(head);
-	head = tmp;
-	size ++;
+	if(head != NULL)
+		node -> setNext(head);
+	head = node;
 }
 
 template <typename T>
-void Linkedlist<T>::insertAtTail(T data)
+void Linkedlist<T>::insertAtTail(Node *node)
 {
-	Node *inserted = new Node(data);
-	if (tail != NULL) tail->setNext(inserted);
-	tail = inserted;
+	if (tail != NULL)
+		tail -> setNext(node);
+	tail = node;
 }
 
 template <typename T>
