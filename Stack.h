@@ -6,7 +6,7 @@
 template <class T>
 class Stack
 {
-	friend std::ostream& operator<<(std::ostream& os, const Stack& stack)
+	friend std::ostream& operator<<(std::ostream& os, Stack const& stack)
 	{
 		for (int i = stack.size - 1; i >= 0; i--)
 			os << *stack.stack[i];
@@ -39,10 +39,7 @@ Stack<T>::Stack(int capacity) : size(0), capacity(capacity), stack(0)
 }
 
 template <class T>
-Stack<T>::~Stack()
-{
-	delete[] stack;
-}
+Stack<T>::~Stack(){ delete[] stack; }
 
 template <class T>
 Stack<T>::Stack(Stack const& copy) : size(copy.size), capacity(copy.capacity), stack(0)
