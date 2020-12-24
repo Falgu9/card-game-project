@@ -1,5 +1,5 @@
-#include "Player.h"
 #include <iostream>
+#include "Player.h"
 
 Player::Player() : name("Anonymous"), points(0), hand(0)
 {
@@ -16,10 +16,7 @@ Player::Player(Player const& copy) : name(copy.name), points(copy.points), hand(
 	hand = new Hand<Card*>(*(copy.hand));
 }
 
-Player::~Player()
-{
-	delete hand;
-}
+Player::~Player() { delete hand; }
 
 Player& Player::operator=(Player const& copy)
 {
@@ -65,12 +62,17 @@ int Player::getNumberOfCards() const
 
 void Player::showHand() const
 {
+	std::cout << "Hand :" << std::endl;
 	std::cout << *hand << std::endl;
 }
 
 int Player::getPoints() const { return points; }
 
-std::ostream& operator<<(std::ostream& os, const Player& player)
+std::ostream& operator<<(std::ostream& os, Player const& player)
 {
-	return os << *(player.hand);
+	os << "	- name : " << player.getName() << std::endl;
+	os << "	- points : " << player.getPoints() << std::endl;
+	os << "	- number of cards : " << player.getNumberOfCards() << std::endl;
+	
+	return os;
 }
