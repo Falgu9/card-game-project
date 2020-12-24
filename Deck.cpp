@@ -4,19 +4,14 @@
 
 Deck::Deck() : deck(0)
 {
-	deck = new Stack<Card*>(DEFAULT_DECK_SIZE);
+	deck = new Stack<Card*>(DECK_SIZE);
 
 	for(int i = 0; i < 4; i++)
 		for(int j = 0; j < 13; j++)
-			deck -> push(new Card(j, i));
+			deck -> push(new Card(j, i, j + 1));
 }
 
-Deck::~Deck()
-{
-	for(int i = 0; i < DEFAULT_DECK_SIZE; i++)
-		delete deck -> pop();
-	delete deck;
-}
+Deck::~Deck() { delete deck; }
 
 Deck::Deck(Deck const& copy)
 {
@@ -47,17 +42,17 @@ Deck* Deck::placeBack(Card *card)
 
 Deck* Deck::shuffle()
 {
-	Card* tmp[DEFAULT_DECK_SIZE];
+	Card* tmp[DECK_SIZE];
 
-	for (int i = 0; i < DEFAULT_DECK_SIZE; i++)
+	for (int i = 0; i < DECK_SIZE; i++)
 		tmp[i] = deck -> pop();
 
 	srand((unsigned int)time(NULL));
 
 	for (int i = 0; i < 500; i++)
-		swap(tmp[rand() % DEFAULT_DECK_SIZE], tmp[rand() % DEFAULT_DECK_SIZE]);
+		swap(tmp[rand() % DECK_SIZE], tmp[rand() % DECK_SIZE]);
 
-	for (int i = 0; i < DEFAULT_DECK_SIZE; i++)
+	for (int i = 0; i < DECK_SIZE; i++)
 		deck -> push(tmp[i]);
 
 	return this;
@@ -70,12 +65,9 @@ void Deck::swap(Card *card1, Card *card2)
 	*card2 = temp;
 }
 
-Stack<Card*> *Deck::getDeck() const
-{
-	return deck;
-}
+Stack<Card*> *Deck::getDeck() const { return deck; }
 
-std::ostream& operator<<(std::ostream& os, const Deck& deck)
+std::ostream& operator<<(std::ostream& os, Deck const& deck)
 {
 	return os << *deck.getDeck();
 }
