@@ -4,11 +4,11 @@
 #include "Card.h"
 #include "Stack.h"
 
-const int DEFAULT_DECK_SIZE = 52;
+const int DECK_SIZE = 52;
 
 class Deck
 {
-	friend std::ostream& operator<<(std::ostream& os, const Deck& deck);
+	friend std::ostream& operator<<(std::ostream& os, Deck const& deck);
 
 private:	
 	Stack<Card*> *deck;
