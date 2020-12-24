@@ -7,7 +7,7 @@
 
 class Player
 {
-	friend std::ostream& operator<<(std::ostream& os, const Player& player);
+	friend std::ostream& operator<<(std::ostream& os, Player const& player);
 
 private:
 	std::string name;
@@ -33,8 +33,6 @@ public:
 	int getNumberOfCards() const;
 
 	void showHand() const;
-
-
 };
 
 #endif
