@@ -39,7 +39,15 @@ Stack<T>::Stack(int capacity) : size(0), capacity(capacity), stack(0)
 }
 
 template <class T>
-Stack<T>::~Stack(){ delete[] stack; }
+Stack<T>::~Stack()
+{
+	for(int i = 0; i < capacity; i++)
+	{
+		delete stack[i];
+	}
+
+	delete[] stack;
+}
 
 template <class T>
 Stack<T>::Stack(Stack const& copy) : size(copy.size), capacity(copy.capacity), stack(0)
@@ -88,9 +96,9 @@ T Stack<T>::pop()
 	if (isEmpty())
 	{
 		std::cout << "Error: Stack is empty." << std::endl;
-		exit(0);
+		exit(-1);
 	}
-
+	
 	return stack[--size];
 }
 
