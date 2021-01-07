@@ -1,33 +1,42 @@
-#ifndef __GAME__H__
-#define __GAME__H__
+#ifndef __CardGame__H__
+#define __CardGame__H__
 
 #include "Player.h"
 #include "Deck.h"
+#include <string>
 
-class Game
+class CardGame
 {
-	friend std::ostream& operator<<(std::ostream& os, Game const& game);
+	friend std::ostream& operator<<(std::ostream& os, CardGame const& CardGame);
 
 protected:
 	Deck *deck;
 	Player **players;
+	Card *playedCard;
+	int indexOfCurrentPlayer;
 	int numberOfPlayers;
 	int turn;
-	
+	void swap(Player *player1, Player *player2);
+
 public:
-	Game();
-	~Game();
-	Game(Game const& copy);
-	Game& operator=(Game const& copy);
+	CardGame();
+	~CardGame();
+	CardGame(CardGame const& copy);
+	CardGame& operator=(CardGame const& copy);
 
 	Deck *getDeck() const;
 	Player **getPlayers() const;
 	int getNumberOfPlayers() const;
 	int getTurn() const;
 
-	void incrementTurn();
-
+	void setRandomOrder();
 	void distributeCards(int numberOfCardsToDeal);
+	void removeAllCardsOfPlayers();
+	void pick(Player *player, int numberOfCardsToPick);
+	void changeDirection(Player *player);
+	void defaultDeck(int numberOfDeck, bool addJokers);
+	void playWithDeckOf32(int numberOfDeck, bool addJokers);
+	void incrementTurn();
 };
 
 #endif
