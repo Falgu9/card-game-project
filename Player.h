@@ -13,6 +13,7 @@ private:
 	std::string name;
 	Hand<Card*> *hand;
 	int points;
+	bool play;
 
 public:
 	Player();
@@ -22,15 +23,18 @@ public:
 	~Player();
 			
 	void setName(std::string name);
-	std::string getName() const;
-
+	void setPlay(bool play);
+	
 	void addCard(Card *card, int index);
 	void addPoints(int points);
 	Card *remove(int index);
 	Card *remove(Card *card);
 
 	int getPoints() const;
+	Hand<Card*> *getHand() const;
 	int getNumberOfCards() const;
+	std::string getName() const;
+	bool canPlay() const;
 
 	void showHand() const;
 };
