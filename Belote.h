@@ -6,12 +6,14 @@
 
 class Belote : public CardGame
 {
-	friend std::ostream& operator<<(std::ostream& os, Belote const& belote);
+	friend std::ostream &operator<<(std::ostream &os, Belote const &belote);
+
 private:
 	Team **teams;
-	Linkedlist<Card*> *playedCards;
+	Linkedlist<Card *> *playedCards;
 	int indexTeamContract;
 	int atout;
+
 public:
 	Belote();
 	~Belote();

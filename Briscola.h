@@ -10,7 +10,7 @@ class Briscola : public CardGame
 
 private:
 	Linkedlist<Card *> *playedCards;
-	Card* briscolaCard;
+	Card *briscolaCard;
 
 public:
 	Briscola();

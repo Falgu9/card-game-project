@@ -7,7 +7,7 @@
 
 class CardGame
 {
-	friend std::ostream& operator<<(std::ostream& os, CardGame const& CardGame);
+	friend std::ostream &operator<<(std::ostream &os, CardGame const &CardGame);
 
 protected:
 	Deck *deck;
@@ -21,8 +21,8 @@ protected:
 public:
 	CardGame();
 	~CardGame();
-	CardGame(CardGame const& copy);
-	CardGame& operator=(CardGame const& copy);
+	CardGame(CardGame const &copy);
+	CardGame &operator=(CardGame const &copy);
 
 	Deck *getDeck() const;
 	Player **getPlayers() const;
@@ -40,4 +40,3 @@ public:
 };
 
 #endif
-

@@ -1,10 +1,10 @@
 #include "Team.h"
 
-Team::Team(int size) : team(NULL), size(0), points(0) 
+Team::Team(int size) : team(NULL), size(0), points(0)
 {
-	this -> size = size;
+	this->size = size;
 
-	team = new Player*[size];
+	team = new Player *[size];
 }
 
 Team::~Team()
@@ -14,7 +14,7 @@ Team::~Team()
 
 Player *Team::getPlayer(int index) const
 {
-	if(index <= size)
+	if (index <= size)
 		return team[index];
 
 	return NULL;
@@ -37,30 +37,30 @@ int Team::getPoints() const
 
 void Team::setSize(int size)
 {
-	this -> size = size;
+	this->size = size;
 }
 
 void Team::setPoints(int points)
 {
-	this -> points = points;
+	this->points = points;
 }
 
 void Team::setPlayer(Player *player, int index)
 {
-	if(index <= size)
+	if (index <= size)
 		team[index] = player;
 }
 
 void Team::setTeam(Player **team)
 {
-	this -> team = team;
+	this->team = team;
 }
 
 void Team::add(Player *player)
 {
-	for(int i =0; i < size; i++)
+	for (int i = 0; i < size; i++)
 	{
-		if(team[i] == NULL)
+		if (team[i] == NULL)
 		{
 			team[i] = player;
 			return;
@@ -72,15 +72,15 @@ void Team::add(Player *player)
 
 void Team::addPoints(int points)
 {
-	this -> points += points;
+	this->points += points;
 }
 
-std::ostream& operator<<(std::ostream& os, Team const& team)
+std::ostream &operator<<(std::ostream &os, Team const &team)
 {
 	os << "Team size : " << team.size << std::endl;
 
 	os << "Team players : " << std::endl;
-	for(int i = 0; i < team.size; i++)
+	for (int i = 0; i < team.size; i++)
 		os << *team.getPlayer(i);
 
 	os << "Team points : " << team.points << std::endl;

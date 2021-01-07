@@ -7,19 +7,19 @@
 template <typename T>
 class Hand
 {
-	friend std::ostream& operator<<(std::ostream& os, Hand const& hand)
+	friend std::ostream &operator<<(std::ostream &os, Hand const &hand)
 	{
 		return os << *(hand.hand);
 	}
-	
+
 private:
 	Linkedlist<T> *hand;
 	void swap(T &data1, T &data2);
 
 public:
 	Hand();
-	Hand(Hand& copy);
-	Hand& operator=(Hand<T> const& copy);
+	Hand(Hand &copy);
+	Hand &operator=(Hand<T> const &copy);
 	~Hand();
 
 	T getHead() const;
@@ -47,15 +47,15 @@ Hand<T>::Hand() : hand(0)
 	hand = new Linkedlist<T>();
 }
 template <typename T>
-Hand<T>::Hand(Hand<T>& copy) : hand(0)
+Hand<T>::Hand(Hand<T> &copy) : hand(0)
 {
 	hand = new Linkedlist<T>(*(copy.hand));
 }
 
 template <typename T>
-Hand<T>& Hand<T>::operator=(Hand<T> const& copy)
+Hand<T> &Hand<T>::operator=(Hand<T> const &copy)
 {
-	if(this != &copy)
+	if (this != &copy)
 	{
 		delete hand;
 		hand = new Linkedlist<T>(*(copy.hand));
@@ -70,43 +70,43 @@ Hand<T>::~Hand() { delete hand; }
 template <typename T>
 T Hand<T>::getHead() const
 {
-	return hand -> getHead();
+	return hand->getHead();
 }
 
 template <typename T>
 T Hand<T>::getTail() const
 {
-	return hand -> getTail();
+	return hand->getTail();
 }
 
 template <typename T>
 T Hand<T>::getAtIndex(int index) const
 {
-	return hand -> getAtIndex(index);
+	return hand->getAtIndex(index);
 }
 
 template <typename T>
 int Hand<T>::getSize() const
 {
-	return hand -> getSize();
+	return hand->getSize();
 }
 
 template <typename T>
 void Hand<T>::insertAtIndex(T data, int index)
 {
-	hand -> insertAtIndex(data, index);
+	hand->insertAtIndex(data, index);
 }
 
 template <typename T>
 T Hand<T>::removeAtIndex(int index)
 {
-	return hand -> removeAtIndex(index);
+	return hand->removeAtIndex(index);
 }
 
 template <typename T>
 T Hand<T>::remove(T data)
 {
-	return hand -> remove(data);
+	return hand->remove(data);
 }
 
 template <typename T>
@@ -123,8 +123,9 @@ void Hand<T>::shuffle()
 	int size = getSize();
 	T tmp[size];
 
-	for (int i = 0; i < size; i++){
-		tmp[i] = hand -> removeAtIndex(0);
+	for (int i = 0; i < size; i++)
+	{
+		tmp[i] = hand->removeAtIndex(0);
 	}
 
 	srand((unsigned int)time(NULL));
@@ -133,31 +134,31 @@ void Hand<T>::shuffle()
 		swap(tmp[rand() % size], tmp[rand() % size]);
 
 	for (int i = 0; i < size; i++)
-		hand -> insertAtIndex(tmp[i], 0);
+		hand->insertAtIndex(tmp[i], 0);
 }
 
 template <typename T>
 bool Hand<T>::isEmpty() const
 {
-	return hand -> isEmpty();
+	return hand->isEmpty();
 }
 
 template <typename T>
 bool Hand<T>::contains(T data) const
 {
-	return hand -> contains(data);
+	return hand->contains(data);
 }
 
 template <typename T>
 int Hand<T>::search(T data) const
 {
-	return hand -> search(data);
+	return hand->search(data);
 }
 
 template <typename T>
 T Hand<T>::operator[](int index)
 {
-	return hand -> operator[](index);
+	return hand->operator[](index);
 }
 
 // template <typename T>

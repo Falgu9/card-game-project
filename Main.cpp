@@ -7,7 +7,7 @@ int main()
 {
 	Briscola a = Briscola();
 	a.play();
-  	return 0;
+	return 0;
 	/*Belote b = Belote();
 	b.play();
   	return 0;*/
