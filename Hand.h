@@ -2,6 +2,7 @@
 #define __HAND__H__
 
 #include "Linkedlist.h"
+#include <ctime>
 
 template <typename T>
 class Hand
@@ -13,6 +14,7 @@ class Hand
 	
 private:
 	Linkedlist<T> *hand;
+	void swap(T &data1, T &data2);
 
 public:
 	Hand();
@@ -29,6 +31,8 @@ public:
 
 	T removeAtIndex(int index);
 	T remove(T data);
+
+	void shuffle();
 
 	bool isEmpty() const;
 	bool contains(T data) const;
@@ -103,6 +107,33 @@ template <typename T>
 T Hand<T>::remove(T data)
 {
 	return hand -> remove(data);
+}
+
+template <typename T>
+void Hand<T>::swap(T &data1, T &data2)
+{
+	T tmp = data1;
+	data1 = data2;
+	data2 = tmp;
+}
+
+template <typename T>
+void Hand<T>::shuffle()
+{
+	int size = getSize();
+	T tmp[size];
+
+	for (int i = 0; i < size; i++){
+		tmp[i] = hand -> removeAtIndex(0);
+	}
+
+	srand((unsigned int)time(NULL));
+
+	for (int i = 0; i < 2; i++)
+		swap(tmp[rand() % size], tmp[rand() % size]);
+
+	for (int i = 0; i < size; i++)
+		hand -> insertAtIndex(tmp[i], 0);
 }
 
 template <typename T>
