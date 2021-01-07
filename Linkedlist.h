@@ -25,7 +25,27 @@ private:
 		T data;
 		Node *next;
 	public:
-		Node(T data) : data(data), next(0) {}
+		Node(T data) : data(data), next(NULL) {}
+		Node(Node const& copy) : data(copy.data)
+		{
+			if(copy.next != NULL)
+				next = new Node(*(copy.next));
+			else
+				next = NULL;
+		}
+		Node& operator=(Node const& copy)
+		{
+			if(this != &copy)
+			{
+				data = copy.data;
+				if(copy.next != NULL)
+					next = new Node(*(copy.next));
+				else
+					next = NULL;
+			}
+
+			return *this;
+		}
 		void setNext(Node *next) { this -> next = next; }
 		void setData(T data) { this -> data = data; }
 		Node *getNext() { return next; }
@@ -67,13 +87,22 @@ public:
 };
 
 template <typename T>
-Linkedlist<T>::Linkedlist() : head(0), tail(0), size(0) {}
+Linkedlist<T>::Linkedlist() : head(NULL), tail(NULL), size(0) {}
 
 template <typename T>
-Linkedlist<T>::Linkedlist(Linkedlist<T> const& copy) : head(0), tail(0), size(copy.size)
+Linkedlist<T>::Linkedlist(Linkedlist<T> const& copy) : head(NULL), tail(NULL), size(copy.size)
 {
-	head = new Node(*(copy.head));
-	tail = new Node(*(copy.tail));
+	if(copy.size == 1)
+	{
+		head = new Node(*(copy.head));
+		tail = head;
+	}
+	
+	if(copy.size > 1)
+	{
+		head = new Node(*(copy.head));
+		tail = new Node(*(copy.tail));
+	}
 }
 
 template <typename T>
@@ -95,9 +124,7 @@ template <typename T>
 Linkedlist<T>::~Linkedlist(){
 	Node *tmp = NULL;
 	for(int i = 0; i < size; i++)
-	{
 		removeAtIndex(0);
-	}
 }
 
 template <typename T>
@@ -207,7 +234,7 @@ T Linkedlist<T>::removeAtHead()
 	head = head -> getNext();
 	delete removed;
 
-	return removed -> getData();
+	return data;
 }
 
 template <typename T>
