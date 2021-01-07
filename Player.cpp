@@ -1,17 +1,17 @@
 #include <iostream>
 #include "Player.h"
 
-Player::Player() : name("Anonymous"), points(0), hand(0)
+Player::Player() : name("Anonymous"), points(0), hand(0), play(true)
 {
 	hand = new Hand<Card*>();
 }
 
-Player::Player(std::string name) : name(name), points(0), hand(0)
+Player::Player(std::string name) : name(name), points(0), hand(0), play(true)
 {
 	hand = new Hand<Card*>();
 }
 
-Player::Player(Player const& copy) : name(copy.name), points(copy.points), hand(0)
+Player::Player(Player const& copy) : name(copy.name), points(copy.points), hand(0), play(copy.play)
 {
 	hand = new Hand<Card*>(*(copy.hand));
 }
@@ -22,6 +22,7 @@ Player& Player::operator=(Player const& copy)
 {
 	if(this != &copy)
 	{
+		play = copy.play;
 		name = copy.name;
 		points = copy.points;
 		delete hand;
@@ -32,6 +33,8 @@ Player& Player::operator=(Player const& copy)
 }
 
 void Player::setName(std::string name) { this -> name = name; }
+
+void Player::setPlay(bool play) { this -> play = play; }
 
 std::string Player::getName() const { return name; }
 
@@ -68,11 +71,16 @@ void Player::showHand() const
 
 int Player::getPoints() const { return points; }
 
+Hand<Card*> *Player::getHand() const { return hand; }
+
+bool Player::canPlay() const { return play; }
+
 std::ostream& operator<<(std::ostream& os, Player const& player)
 {
 	os << "	- name : " << player.getName() << std::endl;
 	os << "	- points : " << player.getPoints() << std::endl;
 	os << "	- number of cards : " << player.getNumberOfCards() << std::endl;
+	os << *player.hand;
 	
 	return os;
 }
