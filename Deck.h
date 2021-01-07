@@ -2,7 +2,8 @@
 #define __DECK__H__
 
 #include "Card.h"
-#include "Stack.h"
+#include <stack>
+#include <iostream>
 
 class Deck
 {
@@ -10,7 +11,7 @@ class Deck
 
 private:
 	int deckSize;
-	Stack<Card*> *deck;
+	std::stack<Card*> *deck;
 	void swap(Card *card1, Card *car2);
 	
 public:
@@ -22,14 +23,14 @@ public:
 
 	Deck& operator=(Deck const& copy);
 
-	Stack<Card*> *getDeck() const;
+	std::stack<Card*> *getDeck() const;
 	int getDeckSize() const;
 
 	void setDeckSize(int deckSize);
 
-	Deck* shuffle();
+	void shuffle();
 	Card* deal();
-	Deck* placeBack(Card* card);
+	void placeBack(Card* card);
 };
 
 #endif

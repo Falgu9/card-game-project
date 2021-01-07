@@ -5,7 +5,6 @@
 CardGame::CardGame() : players(0), numberOfPlayers(0), deck(0), turn(1), playedCard(NULL), indexOfCurrentPlayer(0)
 {
 	deck = new Deck();
-	deck -> shuffle();
 
 	std::cout << "How many players ?" << std::endl;
 	std::cin >> numberOfPlayers;
@@ -143,8 +142,11 @@ void CardGame::distributeCards(int numberOfCardsToDeal)
 		exit(1);
 	}
 	
-	for(int i = 0; i < numberOfCardsToDeal * numberOfPlayers; i++)
-		players[i % numberOfPlayers] -> addCard(deck -> deal(), 0);
+	for(int i = 0; i < numberOfPlayers; i++){
+		for(int j = 0; j < numberOfCardsToDeal; j++){
+			players[i] -> addCard(deck -> deal(), j);
+		}
+	}
 }
 
 void CardGame::changeDirection(Player *player)

@@ -22,6 +22,24 @@ Card::Card(int rank, int suit, std::string symbol) : rank(0), suit(0), symbol(sy
 	this -> symbol = symbol;
 }
 
+Card::Card(int rank, int suit,int value, std::string symbol) : rank(rank), suit(suit),value(value),symbol(symbol)
+{
+	if(suit == 0){
+		couleur = "coeur";
+	}
+	else if(suit == 1){
+		couleur = "carreau";
+	}
+	else if(suit == 2){
+		couleur = "trefle";
+	}
+	else if(suit == 3){
+		couleur = "pique";
+	}
+}
+
+
+
 Card::Card(int rank, int suit, int value) : rank(0), suit(0), value(0)
 {
 	this -> rank = rank;
@@ -39,6 +57,7 @@ int Card::getRank() const { return rank; }
 int Card::getSuit() const { return suit; }
 std::string Card::getSymbol() const { return symbol; }
 int Card::getValue() const { return value; }
+std::string Card::getCouleur() const { return couleur; }
 
 void Card::setRank(int rank) { this -> rank = rank; }
 void Card::setSuit(int suit) { this -> suit = suit; }
@@ -53,12 +72,6 @@ bool Card::operator==(const Card& a) const { return value == a.value; }
 bool Card::operator!=(const Card& a) const { return value != a.value; }
 
 std::ostream& operator<<(std::ostream& os, Card const& card) {
-	if(card.rank >= 0)
-		os << "rank : " << card.rank;
-	if(card.suit >= 0)
-		os << " , suit : " << card.suit;
-	if(card.symbol != "")
-		os << " , symbol : " << card.symbol;
-
-	return os << std::endl;
+	os << card.getSymbol() << " de " << card.getCouleur() << " ->  rang : " << card.getRank() << " | valeur : " << card.getValue() << std::endl;
+	return os;
 }

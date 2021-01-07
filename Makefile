@@ -17,7 +17,8 @@ $(OBJ): %.o: %.cpp
 .PHONY: clean mrproper
  
 clean:
-	rm -rf *.o
- 
+	rm -f -v *.o
+	
 mrproper: clean
-	rm -rf $(OUTPUT)
+	rm -f -v $(OUTPUT)
+

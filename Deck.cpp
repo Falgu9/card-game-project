@@ -2,23 +2,10 @@
 #include <cstdlib>
 #include "Deck.h"
 
-Deck::Deck() : deck(0), deckSize(52)
-{
-	deck = new Stack<Card*>(deckSize);
 
-	for(int i = 0; i < 4; i++)
-		for(int j = 0; j < 13; j++)
-		{
-			if(j == 0)
-				deck -> push(new Card(j, i, 14));
-			else
-				deck -> push(new Card(j, i, j + 1));
-		}
-}
-
-Deck::Deck(int capacity) : deck(0), deckSize(0)
+Deck::Deck()
 {
-	deck = new Stack<Card*>(capacity);
+	deck = new std::stack<Card*>();
 }
 
 Deck::Deck(int defaultDeckSize, int numberOfDeck, bool jokers) : deck(0), deckSize(defaultDeckSize * numberOfDeck)
@@ -38,13 +25,13 @@ Deck::Deck(int defaultDeckSize, int numberOfDeck, bool jokers) : deck(0), deckSi
 	if(jokers)
 	{
 		deckSize += 2;
-		deck = new Stack<Card*>(deckSize);
+		deck = new std::stack<Card*>();
 		deck -> push(new Card(13, -1));
 		deck -> push(new Card(13, -1));
 	}
 	else
 	{
-		deck = new Stack<Card*>(deckSize);
+		deck = new std::stack<Card*>();
 	}
 
 	if(defaultDeckSize == 52)
@@ -77,47 +64,48 @@ Deck::~Deck()
 	delete deck;
 }
 
-Deck::Deck(Deck const& copy) { deck = new Stack<Card*>(*(copy.deck)); }
+Deck::Deck(Deck const& copy) { deck = new std::stack<Card*>(*(copy.deck)); }
 
 Deck& Deck::operator=(Deck const& copy)
 {
 	if(this != &copy)
 	{
 		delete deck;
-		deck = new Stack<Card*>(*(copy.deck));
+		deck = new std::stack<Card*>(*(copy.deck));
 	}
 
 	return *this;
 }
 
 Card* Deck::deal() {
-	deckSize--;
-	return deck -> pop();
+	Card * card = deck -> top();
+	deck->pop();
+	return card;
 }
 
-Deck* Deck::placeBack(Card *card)
+void Deck::placeBack(Card *card)
 {
-	deckSize++;
 	deck -> push(card);
-	return this;
 }
 
-Deck* Deck::shuffle()
+void Deck::shuffle()
 {
-	int size = deckSize;
+	int size = deck->size();
 	Card* tmp[size];
-	for (int i = 0; i < size; i++)
-		tmp[i] = deck -> pop();
+	for (int i = 0; i < size; i++){
+		tmp[i] = deck->top();
+		deck->pop();
+	}
 
 	srand((unsigned int)time(NULL));
 
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 500; i++){
 		swap(tmp[rand() % size], tmp[rand() % size]);
+	}
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < size; i++){
 		deck -> push(tmp[i]);
-
-	return this;
+	}
 }
 
 void Deck::swap(Card *card1, Card *card2)
@@ -127,14 +115,13 @@ void Deck::swap(Card *card1, Card *card2)
 	*card2 = tmp;
 }
 
-Stack<Card*> *Deck::getDeck() const { return deck; }
+std::stack<Card*> *Deck::getDeck() const { return deck; }
 
 
-void Deck::setDeckSize(int deckSize) { this -> deckSize = deckSize; }
 
-int Deck::getDeckSize() const { return deckSize; }
+int Deck::getDeckSize() const { return deck->size(); }
 
 std::ostream& operator<<(std::ostream& os, Deck const& deck)
 {
-	return os << *deck.getDeck();
+	return os << deck.getDeck()->size();
 }
