@@ -1,5 +1,5 @@
-#ifndef __CardGame__H__
-#define __CardGame__H__
+#ifndef __CARDGAME__H__
+#define __CARDGAME__H__
 
 #include "Player.h"
 #include "Deck.h"
