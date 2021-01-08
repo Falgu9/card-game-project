@@ -5,8 +5,8 @@ using namespace std;
 
 int main()
 {
-	Briscola a = Briscola();
-	a.play();
+	Briscola* a = new Briscola();
+	a->play();
 	return 0;
 	/*Belote b = Belote();
 	b.play();
