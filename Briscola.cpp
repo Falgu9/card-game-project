@@ -62,7 +62,7 @@ void Briscola::play()
 				turnScores.push_back(playedCards[i]->getRank() + (playedCards[i]->getSuit() == briscolaCard->getSuit() ? 100 : 0));
 			}
 			printScores(turnScores, "Turn Score : ");
-			turnwinner = evaluateScores(turnScores);	
+			turnwinner = evaluateScores(turnScores);
 			if (turnwinner != numberOfPlayers)
 			{
 				std::cout << "turn winner is " << players[turnwinner]->getName() << " !" << std::endl;
@@ -82,6 +82,7 @@ void Briscola::play()
 			if (deck->getDeckSize() == 1)
 			{
 				deck->placeBack(briscolaCard);
+				distributeCards(1);
 			}
 			else if (deck->getDeckSize() != 0)
 			{
@@ -152,7 +153,6 @@ int Briscola::evaluateScores(std::vector<int> scores)
 	int max = 0;
 	int player;
 	int eq = 0;
-
 	for (int i = 0; i < numberOfPlayers; i++)
 	{
 		if (scores[i] > max)
