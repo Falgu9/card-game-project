@@ -25,7 +25,6 @@ public:
 	void setDeck();
 	void play();
 	void playCard();
-	void setBricolaCard();
 	int evaluateScores(std::vector<int> scores);
 	int printScores(std::vector<int> scores, std::string message);
 	void winCheck();

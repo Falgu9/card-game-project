@@ -5,11 +5,11 @@ using namespace std;
 
 int main()
 {
-	int game;
-	std::cout << "Wich game do you want to play ?" << std::endl <<  "Briscola : 1, Belote : 2" << std::endl;
-	std::cin >> game;
 	Briscola *a;
 	Belote *b;
+	int game;
+	std::cout << "Wich game do you want to play ?" << std::endl << "Briscola : 1, Belote : 2" << std::endl;
+	std::cin >> game;
 	switch (game)
 	{
 	case 1:

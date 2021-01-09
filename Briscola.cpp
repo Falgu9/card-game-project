@@ -16,6 +16,14 @@ Briscola::Briscola() : win(false), winner(numberOfPlayers)
 	turnScores = std::vector<int>(), roundScores = std::vector<int>(numberOfPlayers);
 }
 
+Briscola::~Briscola()
+{
+	/*delete &playedCards;
+	delete briscolaCard;
+	delete &turnScores;
+	delete &roundScores;*/
+}
+
 void Briscola::setDeck()
 {
 	for (int i = 0; i < 4; i++)
@@ -27,9 +35,9 @@ void Briscola::setDeck()
 		deck->placeBack(new Card(6, i, 0, "7"));		 // 7
 		deck->placeBack(new Card(5, i, 0, "6"));		 // 6
 		deck->placeBack(new Card(4, i, 0, "5"));		 // 5
-		deck->placeBack(new Card(3, i, 0, "4"));  // 4
-		deck->placeBack(new Card(2, i, 10, "3")); // 3
-		deck->placeBack(new Card(1, i, 0, "2"));  // 2
+		deck->placeBack(new Card(3, i, 0, "4"));		 // 4
+		deck->placeBack(new Card(2, i, 10, "3"));		 // 3
+		deck->placeBack(new Card(1, i, 0, "2"));		 // 2
 	}
 	deck->shuffle();
 	std::cout << "Taille du paquet : " << deck->getDeckSize() << std::endl;
@@ -78,7 +86,8 @@ void Briscola::play()
 			{
 				std::cout << "Egalité !" << std::endl;
 			}
-			std::cout << " _ _ _ _ _ _ _ _ _ _" << std::endl;
+			std::cout << "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _" << std::endl
+					  << std::endl;
 			sleep(1);
 			printScores(roundScores, "Round scores :");
 
