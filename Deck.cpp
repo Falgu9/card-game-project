@@ -7,7 +7,7 @@ Deck::Deck()
 	deck = new std::stack<Card *>();
 }
 
-Deck::Deck(int defaultDeckSize, int numberOfDeck, bool jokers) : deck(0), deckSize(defaultDeckSize * numberOfDeck)
+Deck::Deck(int defaultDeckSize, int numberOfDeck, bool jokers) :  deckSize(defaultDeckSize * numberOfDeck), deck(0)
 {
 	if (numberOfDeck <= 0)
 	{

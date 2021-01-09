@@ -1,6 +1,6 @@
 #include "Team.h"
 
-Team::Team(int size) : team(NULL), size(0), points(0)
+Team::Team(int size) :  points(0), size(0), team(NULL)
 {
 	this->size = size;
 

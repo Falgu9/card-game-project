@@ -1,5 +1,5 @@
-CXX = g++
-CFLAGS =
+CXX = g++ 
+CFLAGS = --std=c++11 -Wall
 LDFLAGS =
  
 SRC = $(wildcard *.cpp)

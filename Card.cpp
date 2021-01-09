@@ -4,7 +4,7 @@
 std::string Card::ranks[14] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Joker"};
 std::string Card::suits[4] = {"Spade", "Heart", "Club", "Diamond"};
 
-Card::Card() : rank(0), suit(0),value(0), symbol("nothing") {}
+Card::Card() : rank(0), suit(0), symbol("nothing"), value(0) {}
 
 Card::Card(int rank, int suit) : rank(0), suit(0), value(0)
 {
@@ -22,7 +22,7 @@ Card::Card(int rank, int suit, std::string symbol) : rank(0), suit(0), symbol(sy
 	this->symbol = symbol;
 }
 
-Card::Card(int rank, int suit, int value, std::string symbol) : rank(rank), suit(suit), value(value), symbol(symbol)
+Card::Card(int rank, int suit, int value, std::string symbol) : rank(rank), suit(suit), symbol(symbol), value(value)
 {
 	if (suit == 0)
 	{

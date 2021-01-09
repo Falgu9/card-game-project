@@ -192,7 +192,7 @@ int Briscola::evaluateScores(std::vector<int> scores)
 	return player;
 }
 
-int Briscola::printScores(std::vector<int> scores, std::string message)
+void Briscola::printScores(std::vector<int> scores, std::string message)
 {
 	std::cout << message << std::endl;
 	for (int i = 0; i < numberOfPlayers; i++)

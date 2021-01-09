@@ -2,7 +2,7 @@
 #include <ctime>
 #include "CardGame.h"
 
-CardGame::CardGame() : players(0), numberOfPlayers(0), deck(0), turn(1), playedCard(NULL), indexOfCurrentPlayer(0)
+CardGame::CardGame() : deck(0), players(0), playedCard(NULL), indexOfCurrentPlayer(0), numberOfPlayers(0), turn(1)
 {
 	deck = new Deck();
 
@@ -53,7 +53,7 @@ CardGame::~CardGame()
 	delete[] players;
 }
 
-CardGame::CardGame(CardGame const &copy) : numberOfPlayers(copy.numberOfPlayers), deck(0), players(0)
+CardGame::CardGame(CardGame const &copy) :  deck(0), players(0), numberOfPlayers(copy.numberOfPlayers)
 {
 	deck = new Deck(*(copy.deck));
 

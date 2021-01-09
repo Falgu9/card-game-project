@@ -125,7 +125,7 @@ Linkedlist<T> &Linkedlist<T>::operator=(Linkedlist<T> const &copy)
 template <typename T>
 Linkedlist<T>::~Linkedlist()
 {
-	Node *tmp = NULL;
+	//Node *tmp = NULL;
 	for (int i = 0; i < size; i++)
 		removeAtIndex(0);
 }

@@ -26,7 +26,7 @@ public:
 	void play();
 	void playCard();
 	int evaluateScores(std::vector<int> scores);
-	int printScores(std::vector<int> scores, std::string message);
+	void printScores(std::vector<int> scores, std::string message);
 	void winCheck();
 };
 
