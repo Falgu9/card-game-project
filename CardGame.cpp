@@ -179,8 +179,13 @@ void CardGame::removeAllCardsOfPlayers()
 	for (int i = 0; i < numberOfPlayers; i++)
 		for (int j = 0; j < players[i]->getNumberOfCards(); j++)
 			deck->placeBack(players[i]->remove(0));
+}
 
-	deck->shuffle();
+void CardGame::removeAllCardsOfPlayersHand()
+{
+	for (int i = 0; i < numberOfPlayers; i++)
+		for (int j = 0; j < players[i]->getNumberOfCards(); j++)	
+			players[i]->remove(0);
 }
 
 std::ostream &operator<<(std::ostream &os, CardGame const &CardGame)

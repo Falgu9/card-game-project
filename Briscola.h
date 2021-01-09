@@ -28,6 +28,7 @@ public:
 	void setBricolaCard();
 	int evaluateScores(std::vector<int> scores);
 	int printScores(std::vector<int> scores, std::string message);
+	void winCheck();
 };
 
 #endif
