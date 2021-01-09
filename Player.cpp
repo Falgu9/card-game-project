@@ -65,7 +65,7 @@ int Player::getNumberOfCards() const
 
 void Player::showHand() const
 {
-	std::cout << "Hand :" << std::endl;
+	std::cout << "Player "<< name <<" hand :" << std::endl;
 	std::cout << *hand << std::endl;
 }
 

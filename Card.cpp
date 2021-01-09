@@ -26,19 +26,19 @@ Card::Card(int rank, int suit, int value, std::string symbol) : rank(rank), suit
 {
 	if (suit == 0)
 	{
-		couleur = "coeur";
+		couleur = "Coeur";
 	}
 	else if (suit == 1)
 	{
-		couleur = "carreau";
+		couleur = "Carreau";
 	}
 	else if (suit == 2)
 	{
-		couleur = "trefle";
+		couleur = "Trefle";
 	}
 	else if (suit == 3)
 	{
-		couleur = "pique";
+		couleur = "Pique";
 	}
 }
 
