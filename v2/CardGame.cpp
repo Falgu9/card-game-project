@@ -198,13 +198,6 @@ void CardGame::removeAllCardsOfPlayers()
 			deck->placeBack(players[i]->remove(0));
 }
 
-void CardGame::removeAllCardsOfPlayersHand()
-{
-	for (int i = 0; i < numberOfPlayers; i++)
-		for (int j = 0; j < players[i]->getNumberOfCards(); j++)
-			players[i]->remove(0);
-}
-
 std::ostream &operator<<(std::ostream &os, CardGame const &CardGame)
 {
 	os << CardGame.turn << std::endl;
