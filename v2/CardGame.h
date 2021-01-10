@@ -32,7 +32,6 @@ public:
 	void setRandomOrder();
 	void distributeCards(int numberOfCardsToDeal);
 	void removeAllCardsOfPlayers();
-	void removeAllCardsOfPlayersHand();
 	void pick(Player *player, int numberOfCardsToPick);
 	void changeDirection(Player *player);
 	void defaultDeck(int numberOfDeck, bool addJokers);
