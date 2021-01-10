@@ -3,13 +3,8 @@
 
 Briscola::Briscola() : win(false), winner(numberOfPlayers)
 {
-	int maxPlayers = 5;
-	//faire une fonction resetplayer, changements de jeu
-	if (numberOfPlayers > maxPlayers)
-	{
-		std::cout << "Error : Must be " << maxPlayers << " players maximum" << std::endl;
-		exit(1);
-	}
+	int maxPlayers = 5,minPlayers = 1;
+	setPlayers(minPlayers,maxPlayers);
 
 	playedCards = std::vector<Card *>();
 	briscolaCard = new Card();
@@ -45,6 +40,9 @@ void Briscola::setDeck()
 
 void Briscola::play()
 {
+	/*players[0]->addPoints(2);
+	winCheck();*/
+	
 	//DEBUT DU JEU
 	int turnwinner, roundwinner;
 	std::cout << "Bienvenue dans le Briscola !" << std::endl;
@@ -62,7 +60,7 @@ void Briscola::play()
 		while (players[0]->getNumberOfCards() != 0)
 		{
 			//DEBUT DU TOUR
-			//std::cout << "Taille du paquet : " << deck->getDeckSize() << std::endl << std::endl;
+			std::cout << "Taille du paquet : " << deck->getDeckSize() << std::endl << std::endl;
 			for (indexOfCurrentPlayer = 0; indexOfCurrentPlayer < numberOfPlayers; indexOfCurrentPlayer++)
 			{
 				players[indexOfCurrentPlayer]->showHand();
@@ -91,7 +89,7 @@ void Briscola::play()
 			sleep(1);
 			printScores(roundScores, "Round scores :");
 
-			if (deck->getDeckSize() == 1)
+			if (deck->getDeckSize() == numberOfPlayers-1)
 			{
 				deck->placeBack(briscolaCard);
 				distributeCards(1);

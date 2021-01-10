@@ -5,9 +5,60 @@
 CardGame::CardGame() : deck(0), players(0), playedCard(NULL), indexOfCurrentPlayer(0), numberOfPlayers(0), turn(1)
 {
 	deck = new Deck();
+}
 
+CardGame::~CardGame()
+{
+	delete deck;
+
+	for (int i = 0; i < numberOfPlayers; i++)
+		delete players[i];
+
+	delete[] players;
+}
+
+CardGame::CardGame(CardGame const &copy) : deck(0), players(0), numberOfPlayers(copy.numberOfPlayers)
+{
+	deck = new Deck(*(copy.deck));
+
+	players = new Player *[numberOfPlayers];
+	for (int i = 0; i < numberOfPlayers; i++)
+		players[i] = new Player(*(copy.players[i]));
+}
+
+CardGame &CardGame::operator=(CardGame const &copy)
+{
+	if (this != &copy)
+	{
+		numberOfPlayers = copy.numberOfPlayers;
+
+		delete deck;
+
+		for (int i = 0; i < numberOfPlayers; i++)
+			delete players[i];
+
+		delete[] players;
+
+		deck = new Deck(*(copy.deck));
+
+		players = new Player *[numberOfPlayers];
+		for (int i = 0; i < numberOfPlayers; i++)
+			players[i] = new Player(*(copy.players[i]));
+	}
+
+	return *this;
+}
+
+void CardGame::setPlayers(int minPlayers, int maxPlayers)
+{
 	std::cout << "How many players ?" << std::endl;
 	std::cin >> numberOfPlayers;
+
+	if (numberOfPlayers > maxPlayers || numberOfPlayers <= minPlayers)
+	{
+		std::cout << "Error : Must be " << maxPlayers << " players maximum "<< std::endl;
+		exit(1);
+	}
 
 	players = new Player *[numberOfPlayers];
 
@@ -39,50 +90,7 @@ CardGame::CardGame() : deck(0), players(0), playedCard(NULL), indexOfCurrentPlay
 
 		players[i] = new Player(name);
 	}
-
 	setRandomOrder();
-}
-
-CardGame::~CardGame()
-{
-	delete deck;
-
-	for (int i = 0; i < numberOfPlayers; i++)
-		delete players[i];
-
-	delete[] players;
-}
-
-CardGame::CardGame(CardGame const &copy) :  deck(0), players(0), numberOfPlayers(copy.numberOfPlayers)
-{
-	deck = new Deck(*(copy.deck));
-
-	players = new Player *[numberOfPlayers];
-	for (int i = 0; i < numberOfPlayers; i++)
-		players[i] = new Player(*(copy.players[i]));
-}
-
-CardGame &CardGame::operator=(CardGame const &copy)
-{
-	if (this != &copy)
-	{
-		numberOfPlayers = copy.numberOfPlayers;
-
-		delete deck;
-
-		for (int i = 0; i < numberOfPlayers; i++)
-			delete players[i];
-
-		delete[] players;
-
-		deck = new Deck(*(copy.deck));
-
-		players = new Player *[numberOfPlayers];
-		for (int i = 0; i < numberOfPlayers; i++)
-			players[i] = new Player(*(copy.players[i]));
-	}
-
-	return *this;
 }
 
 void CardGame::swap(Player *player1, Player *player2)
@@ -184,7 +192,7 @@ void CardGame::removeAllCardsOfPlayers()
 void CardGame::removeAllCardsOfPlayersHand()
 {
 	for (int i = 0; i < numberOfPlayers; i++)
-		for (int j = 0; j < players[i]->getNumberOfCards(); j++)	
+		for (int j = 0; j < players[i]->getNumberOfCards(); j++)
 			players[i]->remove(0);
 }
 

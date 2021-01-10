@@ -31,6 +31,7 @@ public:
 	void shuffle();
 	Card *deal();
 	void placeBack(Card *card);
+	
 };
 
 #endif

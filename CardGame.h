@@ -38,6 +38,7 @@ public:
 	void defaultDeck(int numberOfDeck, bool addJokers);
 	void playWithDeckOf32(int numberOfDeck, bool addJokers);
 	void incrementTurn();
+	void setPlayers(int minPlayers,int maxPlayers);
 };
 
 #endif
