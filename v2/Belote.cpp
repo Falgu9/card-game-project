@@ -1,6 +1,6 @@
 #include "Belote.h"
 
-Belote::Belote() : atout(-1), indexTeamContract(-1), playedCards(NULL)
+Belote::Belote() : playedCards(NULL), indexTeamContract(-1),atout(-1)
 {
 	setPlayers(4,4);
 
@@ -252,7 +252,6 @@ void Belote::setNewOrderOfPlayers()
 
 void Belote::playCard()
 {
-	int choice;
 	
 	if(indexOfCurrentPlayer == 0) // first player so can play any cards
 	{
@@ -451,7 +450,7 @@ bool Belote::partenerIsMaster()
 			maxValue = i;
 	}
 
-	if(maxValue == 0 && indexOfCurrentPlayer == 2 || maxValue == 1 && indexOfCurrentPlayer == 3)
+	if((maxValue == 0 && indexOfCurrentPlayer == 2) || (maxValue == 1 && indexOfCurrentPlayer == 3))
 	{
 		return true;
 	}

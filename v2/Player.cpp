@@ -1,17 +1,17 @@
 #include <iostream>
 #include "Player.h"
 
-Player::Player() : name("Anonymous"), points(0), hand(0), play(true)
+Player::Player() : name("Anonymous"), hand(0), points(0), play(true)
 {
 	hand = new Hand<Card*>();
 }
 
-Player::Player(std::string name) : name(name), points(0), hand(0), play(true)
+Player::Player(std::string name) : name(name), hand(0), points(0), play(true)
 {
 	hand = new Hand<Card*>();
 }
 
-Player::Player(Player const& copy) : name(copy.name), points(copy.points), hand(0), play(copy.play)
+Player::Player(Player const& copy) : name(copy.name), hand(0), points(copy.points), play(copy.play)
 {
 	hand = new Hand<Card*>(*(copy.hand));
 }
