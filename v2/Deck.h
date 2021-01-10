@@ -16,17 +16,14 @@ private:
 
 public:
 	Deck();
-	Deck(int capacity);
 	Deck(int defaultDeckSize, int numberOfDeck, bool jokers);
-	~Deck();
 	Deck(Deck const &copy);
+	~Deck();
 
 	Deck &operator=(Deck const &copy);
 
 	std::stack<Card *> *getDeck() const;
 	int getDeckSize() const;
-
-	void setDeckSize(int deckSize);
 
 	void shuffle();
 	Card *deal();
